@@ -2,8 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>PhoneGap</title>
+    <link type="text/css" href="app.css" rel="stylesheet"/>
     <script src="phonegap.js"></script>
     <script src="barcodescanner.js"></script>
+    <script>
+        document.addEventListener("deviceready", function () {
+            var pgElement = document.getElementById("PhoneGapReady");
+            pgElement.style.display = "";
+
+            var buttons = document.getElementById("APIs").getElementsByTagName("button");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].removeAttribute("disabled");
+            }
+        }, false);
+    </script>
+
 </head>
     <body>
         <h1>PhoneGap example</h1>
@@ -25,16 +38,6 @@
             <button type="button" onclick="scanBarcode()" disabled="disabled">Barcode</button>
         </div>
     
-        <script>
-            document.addEventListener("deviceready", function() {
-                var pgElement = document.getElementById("PhoneGapReady");
-                pgElement.style.display = "";
 
-                var buttons = pgElement.getElementsByTagName("button");
-                for (var i = 0; i < buttons.length; i++) {
-                    buttons[i].removeAttribute("disabled");
-                }
-            }, false);
-        </script>
     </body>
 </html>
