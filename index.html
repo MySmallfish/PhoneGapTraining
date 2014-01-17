@@ -14,6 +14,10 @@
             for (var i = 0; i < buttons.length; i++) {
                 buttons[i].removeAttribute("disabled");
             }
+            document.addEventListener("backbutton", function() {
+                navigator.notification.alert("Are you leaving???");
+                navigator.exitApp();
+            }, false);
         }, false);
     </script>
 
