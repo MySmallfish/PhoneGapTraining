@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>PhoneGap</title>
+    <script src="phonegap.js"></script>
+    <script src="barcodescanner.js"></script>
+</head>
+    <body>
+        <h1>PhoneGap example</h1>
+        <div id="PhoneGapReady" class="PhoneGapReady">
+            <h2>
+                Phonegap Is Ready to use!
+            </h2>
+        </div>
+        
+        <div id="APIs">
+            <img width="200" height="100" id="image"/>
+            <button type="button" onclick="openCamera()" disabled="disabled">Camera</button>
+            <button type="button" onclick="saveToFile()" disabled="disabled">Save To File</button>
+            <div id="gpsLocation"></div>
+            <button type="button" onclick="getGpsLocation()" disabled="disabled">GPS</button>
+            <div id="accelerometer"></div>
+            <button type="button" onclick="getAccelerometer()" disabled="disabled">Accelerometer</button>
+            <div id="barcode"></div>
+            <button type="button" onclick="scanBarcode()" disabled="disabled">Barcode</button>
+        </div>
+    
+        <script>
+            document.addEventListener("deviceready", function() {
+                var pgElement = document.getElementById("PhoneGapReady");
+                pgElement.style.display = "";
+
+                var buttons = pgElement.getElementsByTagName("button");
+                for (var i = 0; i < buttons.length; i++) {
+                    buttons[i].removeAttribute("disabled");
+                }
+            }, false);
+        </script>
+    </body>
+</html>

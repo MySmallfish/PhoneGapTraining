@@ -1,0 +1,7 @@
+﻿.PhoneGapReady {
+    border-radius: 8px;
+    background-color: darkgreen;
+    color: white;
+    font-weight: bold;
+    display: none;
+}
