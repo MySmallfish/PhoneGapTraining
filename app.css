@@ -5,3 +5,23 @@
     font-weight: bold;
     display: none;
 }
+
+
+#barcode {
+    font-size: 18pt;
+    text-align: center;
+}
+
+button {
+    border: none;
+    width: 90%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-appearance: none;
+    background-color: darkolivegreen;
+    color: white;
+    font-size: 14pt;
+    font-weight: bold;
+    border-radius: 8px;
+}

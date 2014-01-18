@@ -19,6 +19,67 @@
                 navigator.exitApp();
             }, false);
         }, false);
+
+
+        function openCamera() {
+            navigator.camera.getPicture(
+                function(url) {
+                    var img = document.getElementById("image");
+                    img.setAttribute("src", url);
+                }, function(error) {
+                    navigator.notification.alert("Error calling camera: " + error.message );
+                }, {
+                    sourceType: Camera.PictureSourceType.CAMERA,
+                    quality: 75,
+                    destinationType: Camera.DestinationType.FILE_URI
+                });
+        }
+
+        function getGpsLocation() {
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    navigator.notificationalert('Latitude: ' + position.coords.latitude + '\n' +
+     'Longitude: ' + position.coords.longitude + '\n' +
+     'Altitude: ' + position.coords.altitude + '\n' +
+     'Accuracy: ' + position.coords.accuracy + '\n' +
+     'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
+     'Heading: ' + position.coords.heading + '\n' +
+     'Speed: ' + position.coords.speed + '\n' +
+     'Timestamp: ' + position.timestamp + '\n');
+                },function(error) {
+                    navigator.notification.alert("Error calling gps: " + error.message );
+                });
+        }
+
+        function getAccelerometer() {
+            navigator.accelerometer.getCurrentAcceleration(
+                function (acceleration) {
+                    alert('Acceleration X: ' + acceleration.x + '\n' +
+                          'Acceleration Y: ' + acceleration.y + '\n' +
+                          'Acceleration Z: ' + acceleration.z + '\n' +
+                          'Timestamp: ' + acceleration.timestamp + '\n');
+                },
+                function (error) {
+                navigator.notification.alert("Error calling camera: " + error.message );
+            });
+        }
+
+        function scanBarcode() {
+
+            var scanner;
+            if (typeof cordova !== "undefined") {
+                scanner = cordova.require("cordova/plugin/BarcodeScanner");
+            }
+            if (scanner) {
+                scanner.scan(function(result) {
+                    var barcode = result.text;
+
+                    document.getElementById("barcode").innerHTML = barcode;
+                });
+            }
+            
+        }
+
     </script>
 
 </head>
