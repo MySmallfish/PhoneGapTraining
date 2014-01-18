@@ -38,7 +38,7 @@
         function getGpsLocation() {
             navigator.geolocation.getCurrentPosition(
                 function(position) {
-                    navigator.notificationalert('Latitude: ' + position.coords.latitude + '\n' +
+                    navigator.notification.alert('Latitude: ' + position.coords.latitude + '\n' +
      'Longitude: ' + position.coords.longitude + '\n' +
      'Altitude: ' + position.coords.altitude + '\n' +
      'Accuracy: ' + position.coords.accuracy + '\n' +
@@ -80,6 +80,32 @@
             
         }
 
+        function saveToFile() {
+            var sourceFileUri = document.getElementById("image").getAttribute("src"),
+                destDirectory;
+            function fail(error) {
+                navigator.notification.alert("Error Code: " + error.code);
+            }
+            function gotFile(file) {
+                file.copyTo(destDirectory, "NewImageFileName.jpg", function(fileEntry) {
+                    document.getElementById("imageFomFile").setAttribute("src", fileEntry.toURL());
+                });
+            }
+
+            function directoryCreated(directory) {
+                destDirectory = directory;
+                window.resolveLocalFileSystemURI(sourceFileUri, gotFile, fail);
+            
+            }
+
+            function onFSWin(fileSystem) {
+                fileSystem.root.getDirectory("TargetDir", { create: true, exclusive: false }, directoryCreated, fail);
+            }
+
+
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFSWin, fail);
+        }
+
     </script>
 
 </head>
@@ -92,8 +118,11 @@
         </div>
         
         <div id="APIs">
+            <h3>From Camera:</h3>
             <img width="200" height="100" id="image"/>
             <button type="button" onclick="openCamera()" disabled="disabled">Camera</button>
+            <h3>From File:</h3>
+            <img width="200" height="100" id="imageFomFile" />
             <button type="button" onclick="saveToFile()" disabled="disabled">Save To File</button>
             <div id="gpsLocation"></div>
             <button type="button" onclick="getGpsLocation()" disabled="disabled">GPS</button>
