@@ -5,29 +5,71 @@
     <link type="text/css" href="app.css" rel="stylesheet"/>
     <script src="phonegap.js"></script>
     <script src="barcodescanner.js"></script>
+    <script type="text/javascript" src="PushNotification.js"></script>
     <script>
+        var app = {
+            successHandler: function(result) {
+                alert('Callback Success! Result = ' + result);
+            },
+            errorHandler: function(error) {
+                alert(error);
+            },
+            onNotificationGCM: function(e) {
+                switch (e.event) {
+                case 'registered':
+                    if (e.regid.length > 0) {
+                        console.log("Regid " + e.regid);
+                        alert('registration id = ' + e.regid);
+                    }
+                    break;
+
+                case 'message':
+                    // this is the actual push notification. its format depends on the data model from the push server
+                    alert('message = ' + e.message + ' msgcnt = ' + e.msgcnt);
+                    break;
+
+                case 'error':
+                    alert('GCM error = ' + e.msg);
+                    break;
+
+                default:
+                    alert('An unknown GCM event has occurred');
+                    break;
+                }
+            }
+        };
+
+        function registerPush() {
+            var pushNotification = window.plugins.pushNotification;
+            pushNotification.register(app.successHandler, app.errorHandler, { "senderID": "648085010263", "ecb": "app.onNotificationGCM" });
+        }
+
+
+
         document.addEventListener("deviceready", function () {
             var pgElement = document.getElementById("PhoneGapReady");
             pgElement.style.display = "";
 
             var element = document.getElementById('deviceProperties');
             element.innerHTML = 'Device Model: ' + device.model + '<br />' +
-                                'Device Cordova: ' + device.cordova + '<br />' +
-                                'Device Platform: ' + device.platform + '<br />' +
-                                'Device UUID: ' + device.uuid + '<br />' +
-                                'Device Version: ' + device.version + '<br />';
+                'Device Cordova: ' + device.cordova + '<br />' +
+                'Device Platform: ' + device.platform + '<br />' +
+                'Device UUID: ' + device.uuid + '<br />' +
+                'Device Version: ' + device.version + '<br />';
 
             var buttons = document.getElementById("APIs").getElementsByTagName("button");
             for (var i = 0; i < buttons.length; i++) {
                 buttons[i].removeAttribute("disabled");
             }
             document.addEventListener("backbutton", function() {
-                navigator.notification.alert();
+               
                 navigator.notification.confirm("Are you leaving???", function() {
                     navigator.app.exitApp();
                 }, "Leaving is SAD", ["SURE", "No way!"]);
 
             }, false);
+
+            registerPush();
         }, false);
 
 
@@ -49,13 +91,13 @@
             navigator.geolocation.getCurrentPosition(
                 function(position) {
                     navigator.notification.alert('Latitude: ' + position.coords.latitude + '\n' +
-     'Longitude: ' + position.coords.longitude + '\n' +
-     'Altitude: ' + position.coords.altitude + '\n' +
-     'Accuracy: ' + position.coords.accuracy + '\n' +
-     'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
-     'Heading: ' + position.coords.heading + '\n' +
-     'Speed: ' + position.coords.speed + '\n' +
-     'Timestamp: ' + position.timestamp + '\n');
+                        'Longitude: ' + position.coords.longitude + '\n' +
+                        'Altitude: ' + position.coords.altitude + '\n' +
+                        'Accuracy: ' + position.coords.accuracy + '\n' +
+                        'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
+                        'Heading: ' + position.coords.heading + '\n' +
+                        'Speed: ' + position.coords.speed + '\n' +
+                        'Timestamp: ' + position.timestamp + '\n');
                 },function(error) {
                     navigator.notification.alert("Error calling gps: " + error.message );
                 });
@@ -65,13 +107,13 @@
             navigator.accelerometer.getCurrentAcceleration(
                 function (acceleration) {
                     alert('Acceleration X: ' + acceleration.x + '\n' +
-                          'Acceleration Y: ' + acceleration.y + '\n' +
-                          'Acceleration Z: ' + acceleration.z + '\n' +
-                          'Timestamp: ' + acceleration.timestamp + '\n');
+                        'Acceleration Y: ' + acceleration.y + '\n' +
+                        'Acceleration Z: ' + acceleration.z + '\n' +
+                        'Timestamp: ' + acceleration.timestamp + '\n');
                 },
                 function (error) {
-                navigator.notification.alert("Error calling camera: " + error.message );
-            });
+                    navigator.notification.alert("Error calling camera: " + error.message );
+                });
         }
 
         function scanBarcode() {
@@ -114,6 +156,7 @@
 
 
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFSWin, fail);
+
         }
 
     </script>
