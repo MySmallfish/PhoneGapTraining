@@ -41,10 +41,28 @@
                             alert('An unknown GCM event has occurred');
                             break;
                     }
+                },
+                storeToken: function(token) {
+                    
                 }
             };
 
             pushNotification.register(app.successHandler, app.errorHandler, { "senderID": "648085010263", "ecb": "app.onNotificationGCM" });
+
+            pushNotification.registerDevice({ alert: true, badge: true, sound: true }, function (status) {
+                console.log('registerDevice status: ', status);
+                app.storeToken(status.deviceToken);
+            });
+
+            pushNotification.getPendingNotifications(function(notifications) {
+                console.log('getPendingNotifications', notifications);
+            });
+
+            pushNotification.getRemoteNotificationStatus(function (status) {
+                console.log('Registration check - getRemoteNotificationStatus', status);
+            });
+
+            pushNotification.setApplicationIconBadgeNumber(5);
         }
 
 
