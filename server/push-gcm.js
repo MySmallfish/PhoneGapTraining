@@ -2,7 +2,7 @@
 var message = new gcm.Message();
 
 //API Server Key
-var sender = new gcm.Sender('AIzaSyCNXXiM5PFWO6zTV3yGcNhUkI7cf364zME');
+var sender = new gcm.Sender('AIzaSyAEFyCC0gm6ZmtvPoory_UcKf_yy7nQz2g');
 var registrationIds = [];
 
 // Value the payload data to send...
