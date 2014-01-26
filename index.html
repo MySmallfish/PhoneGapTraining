@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>PhoneGap</title>
-    <link type="text/css" href="app.css" rel="stylesheet"/>
+    <link type="text/css" href="app.css" rel="stylesheet" />
     <script src="phonegap.js"></script>
     <script src="barcodescanner.js"></script>
     <script type="text/javascript" src="PushNotification.js"></script>
@@ -42,8 +42,8 @@
                             break;
                     }
                 },
-                storeToken: function(token) {
-                    
+                storeToken: function (token) {
+
                 }
             };
 
@@ -54,7 +54,7 @@
                 app.storeToken(status.deviceToken);
             });
 
-            pushNotification.getPendingNotifications(function(notifications) {
+            pushNotification.getPendingNotifications(function (notifications) {
                 console.log('getPendingNotifications', notifications);
             });
 
@@ -83,25 +83,25 @@
             for (var i = 0; i < buttons.length; i++) {
                 buttons[i].removeAttribute("disabled");
             }
-            document.addEventListener("backbutton", function() {
-               
-                navigator.notification.confirm("Are you leaving???", function() {
+            document.addEventListener("backbutton", function () {
+
+                navigator.notification.confirm("Are you leaving???", function () {
                     navigator.app.exitApp();
                 }, "Leaving is SAD", ["SURE", "No way!"]);
 
             }, false);
 
-            registerPush();
+            //registerPush();
         }, false);
 
 
         function openCamera() {
             navigator.camera.getPicture(
-                function(url) {
+                function (url) {
                     var img = document.getElementById("image");
                     img.setAttribute("src", url);
-                }, function(error) {
-                    navigator.notification.alert("Error calling camera: " + error.message );
+                }, function (error) {
+                    navigator.notification.alert("Error calling camera: " + error.message);
                 }, {
                     sourceType: Camera.PictureSourceType.CAMERA,
                     quality: 75,
@@ -111,7 +111,7 @@
 
         function getGpsLocation() {
             navigator.geolocation.getCurrentPosition(
-                function(position) {
+                function (position) {
                     navigator.notification.alert('Latitude: ' + position.coords.latitude + '\n' +
                         'Longitude: ' + position.coords.longitude + '\n' +
                         'Altitude: ' + position.coords.altitude + '\n' +
@@ -120,8 +120,8 @@
                         'Heading: ' + position.coords.heading + '\n' +
                         'Speed: ' + position.coords.speed + '\n' +
                         'Timestamp: ' + position.timestamp + '\n');
-                },function(error) {
-                    navigator.notification.alert("Error calling gps: " + error.message );
+                }, function (error) {
+                    navigator.notification.alert("Error calling gps: " + error.message);
                 });
         }
 
@@ -134,7 +134,7 @@
                         'Timestamp: ' + acceleration.timestamp + '\n');
                 },
                 function (error) {
-                    navigator.notification.alert("Error calling camera: " + error.message );
+                    navigator.notification.alert("Error calling camera: " + error.message);
                 });
         }
 
@@ -145,13 +145,13 @@
                 scanner = cordova.require("cordova/plugin/BarcodeScanner");
             }
             if (scanner) {
-                scanner.scan(function(result) {
+                scanner.scan(function (result) {
                     var barcode = result.text;
 
                     document.getElementById("barcode").innerHTML = barcode;
                 });
             }
-            
+
         }
 
         function saveToFile() {
@@ -161,7 +161,7 @@
                 navigator.notification.alert("Error Code: " + error.code);
             }
             function gotFile(file) {
-                file.copyTo(destDirectory, "NewImageFileName.jpg", function(fileEntry) {
+                file.copyTo(destDirectory, "NewImageFileName.jpg", function (fileEntry) {
                     document.getElementById("imageFomFile").setAttribute("src", fileEntry.toURL());
                 });
             }
@@ -169,7 +169,7 @@
             function directoryCreated(directory) {
                 destDirectory = directory;
                 window.resolveLocalFileSystemURI(sourceFileUri, gotFile, fail);
-            
+
             }
 
             function onFSWin(fileSystem) {
@@ -182,31 +182,52 @@
         }
 
     </script>
-
-</head>
-    <body>
-        <h1>PhoneGap example</h1>
-        <div id="PhoneGapReady" class="PhoneGapReady">
-            <h2>
-                Phonegap Is Ready to use!
-            </h2>
-        </div>
+    <style>
+    body {
+        direction: rtl;
+        text-align: center;
+        font-family: tahoma, sans-serif;
+        font-size: 12pt;
         
-        <div id="APIs">
-            <h3>From Camera:</h3>
-            <img width="200" height="100" id="image"/>
-            <button type="button" onclick="openCamera()" disabled="disabled">Camera</button>
-            <h3>From File:</h3>
-            <img width="200" height="100" id="imageFomFile" />
-            <button type="button" onclick="saveToFile()" disabled="disabled">Save To File</button>
-            <div id="gpsLocation"></div>
-            <button type="button" onclick="getGpsLocation()" disabled="disabled">GPS</button>
-            <div id="accelerometer"></div>
-            <button type="button" onclick="getAccelerometer()" disabled="disabled">Accelerometer</button>
-            <div id="barcode"></div>
-            <button type="button" onclick="scanBarcode()" disabled="disabled">Barcode</button>
-        </div>
-        <div id="deviceProperties"></div>
+    }
+        button {
+            background-color: goldenrod;
+                }         
+    </style>
+</head>
+<body>
+    <!--<h1>PhoneGap example</h1>-->
+    <h1>י.ל.מ פתרונות בע"מ</h1>
+    <div id="PhoneGapReady" class="PhoneGapReady">
+        <!--<h2>
+            Phonegap Is Ready to use!
+        </h2>-->
+    </div>
 
-    </body>
+    <div id="APIs">
+        <div class="app-logo">
+            <div>
+                <img src="ylm-logo-large.png" />
+            </div>
+        </div>
+        <!--<h3>From Camera:</h3>
+        <img width="200" height="100" id="image"/>
+        <button type="button" onclick="openCamera()" disabled="disabled">Camera</button>
+        <h3>From File:</h3>
+        <img width="200" height="100" id="imageFomFile" />
+        <button type="button" onclick="saveToFile()" disabled="disabled">Save To File</button>
+        <div id="gpsLocation"></div>
+        <button type="button" onclick="getGpsLocation()" disabled="disabled">GPS</button>
+        <div id="accelerometer"></div>
+        <button type="button" onclick="getAccelerometer()" disabled="disabled">Accelerometer</button>-->
+        
+        <!--<button type="button" onclick="scanBarcode()" disabled="disabled">Barcode</button>-->
+        <button type="button" onclick="scanBarcode()" disabled="disabled">סרוק ברקוד</button>
+        <h3>ברקוד שנסרק</h3>
+        <div id="barcode"></div>
+
+    </div>
+    <div id="deviceProperties"></div>
+
+</body>
 </html>
