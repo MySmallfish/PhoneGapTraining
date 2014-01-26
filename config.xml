@@ -2,8 +2,9 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "il.co.simpl.phonegap"
-        version   = "1.0.2">
-  <name>PhoneGap Demo App</name>
+        version   = "1.0.3">
+  <name>י.ל.מ. Inspector</name>
+  <!--<name>PhoneGap Demo App</name>-->
 
   <description>
     PhoneGap Demo App
