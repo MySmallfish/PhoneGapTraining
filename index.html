@@ -138,6 +138,10 @@
                 });
         }
 
+        function enter() {
+            alert("דיווח כניסה נקלט בשעה: " + (new Date()).getHours() + ":" + (new Date()).getMinutes());
+        }
+
         function scanBarcode() {
 
             var scanner;
@@ -149,6 +153,9 @@
                     var barcode = result.text;
 
                     document.getElementById("barcode").innerHTML = barcode;
+                    document.getElementById("scannedImage").setAttribute("src", barcode);
+                    document.getElementById("enter").style.display = "";
+
                 });
             }
 
@@ -192,7 +199,10 @@
     }
         button {
             background-color: goldenrod;
-                }         
+                } 
+        button.enter {
+            background-color: maroon;
+        }        
     </style>
 </head>
 <body>
@@ -223,11 +233,12 @@
         
         <!--<button type="button" onclick="scanBarcode()" disabled="disabled">Barcode</button>-->
         <button type="button" onclick="scanBarcode()" disabled="disabled">סרוק ברקוד</button>
-        <h3>ברקוד שנסרק</h3>
-        <div id="barcode"></div>
-
+        <h3 style="display:none">ברקוד שנסרק</h3>
+        <div style="display:none" id="barcode"></div>
+        <img id="scannedImage"/>
+        <button style="display:none" type="button" onclick="enter()" id="enter" class="enter" disabled="disabled">כניסה</button>
     </div>
-    <div id="deviceProperties"></div>
+    <div style="display:none" id="deviceProperties"></div>
 
 </body>
 </html>
