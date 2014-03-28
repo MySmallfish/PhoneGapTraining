@@ -2,15 +2,14 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "il.co.simpl.phonegap"
-        version   = "1.0.3">
-  <name>י.ל.מ. Inspector</name>
-  <!--<name>PhoneGap Demo App</name>-->
+        version   = "1.0.4">
+  <name>PhoneGap Demo App</name>
 
   <description>
     PhoneGap Demo App
   </description>
 
-  <author href="http://wwww.ylm.co.il" email="mysmallfish@gmail.com">
+  <author href="http://wwww.simpl.co.il" email="mysmallfish@gmail.com">
     Simple. Software &amp; Technologies
   </author>
 
