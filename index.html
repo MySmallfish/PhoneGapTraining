@@ -153,8 +153,7 @@
                     var barcode = result.text;
 
                     document.getElementById("barcode").innerHTML = barcode;
-                    document.getElementById("scannedImage").setAttribute("src", barcode);
-                    document.getElementById("enter").style.display = "";
+                    document.getElementById("barcode").style.display = "";
 
                 });
             }
@@ -197,6 +196,9 @@
         font-size: 12pt;
         
     }
+    #barcode {
+        font-size: 14pt;
+    }
         button {
             background-color: goldenrod;
                 } 
@@ -227,11 +229,7 @@
         <button type="button" onclick="getAccelerometer()" disabled="disabled">Accelerometer</button>
         
         <button type="button" onclick="scanBarcode()" disabled="disabled">Barcode</button>
-        
-        <h3 style="display:none">ברקוד שנסרק</h3>
         <div style="display:none" id="barcode"></div>
-        <img id="scannedImage" width="300"/>
-        <button style="display:none" type="button" onclick="enter()" id="enter" class="enter" disabled="disabled">כניסה</button>
     </div>
     <div style="display:none" id="deviceProperties"></div>
 
