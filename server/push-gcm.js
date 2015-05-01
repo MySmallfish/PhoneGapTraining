@@ -1,6 +1,6 @@
 ﻿var gcm = require('node-gcm');
 var message = new gcm.Message();
-
+    
 //API Server Key
 var sender = new gcm.Sender('AIzaSyAEFyCC0gm6ZmtvPoory_UcKf_yy7nQz2g');
 var registrationIds = [];
@@ -15,7 +15,7 @@ message.addData('soundname', 'beep.wav'); //Sound to play upon notification rece
 message.timeToLive = 3000;// Duration in seconds to hold in GCM and retry before timing out. Default 4 weeks (2,419,200 seconds) if not specified.
 
 // At least one reg id required
-registrationIds.push('APA91bEpTuw7L_O4NLP78JUOVTDfjCEcr5DlIsim4pJ1tE8caER7L4Paz6-jxafuPjrrIEDuRjmgpoNiD7jPzRquN7H9sF0CpZCDdi50ogM0GUdGDw_nekd-NXvlflOmJ6AXRG6hb4guF-rqaJBDLX3qp5uZo_nVLw');
+registrationIds.push('APA91bFF6ShcwjLXTCjOeJDvrXljbKsJsasV6kkJxYwvj_u7DsTfktVzqKYyobVrHDcpNRLMMPpRoG--Wja8oFkLt6ZpJd7dplzti7iKljcFTQfZ_fcrK8uXY7ybh5o59jHNAAxT_kUnvHfpwVphJBvAnzD3YoDY3Q');
 
 /**
  * Parameters: message-literal, registrationIds-array, No. of retries, callback-function
